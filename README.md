@@ -476,3 +476,13 @@ In summary, our trading algorithm provides the following benefits:
 in in-sample and out-of-sample backtests.
 * Diversification of portfolio, as a result of universal selection and portfolio optimization.
 * A lightweight, easily interpretable model and algorithm driven by publicly available financial data.
+
+Interestingly, our algorithm performed better in some Out-of-Sample tests than it did in-sample. This
+is perhaps unsurprising, because although we used backtesting to decide on parameters such as the number
+of symbols in the universe and the lookback period, we were also significantly constrained by computational
+constraints, as discussed in Section 6.2. While active, however, the algorithm conducted its own universe
+selection, training, prediction, and portfolio building, so there was little opportunity for the model to be
+overfit to in-sample data. Though our algorithm did not perform as well as desired during bull markets,
+which was the case during the last 2 years post-COVID and several years prior, we performed very well
+during economic downturns. We believe our strategy would be a profitable complement to strategies that
+perform well during bull markets.
