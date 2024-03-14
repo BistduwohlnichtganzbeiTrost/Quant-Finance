@@ -31,3 +31,23 @@ class BasicTemplateAlgorithm(QCAlgorithm):
         self.SetStartDate(2018, 8, 1)
         self.SetEndDate(2018, 11, 21)
         self.SetCash(1e5)
+
+        # set the currency pair, and the correlated currency pair
+        self.currency = "AUDUSD"
+        self.AddForex(self.currency, Resolution.Daily)
+
+        self.corr_currency = "USDCHF"
+        self.AddForex(self.corr_currency, Resolution.Daily)
+
+        # define a long-short portfolio
+        self.long_list = []
+        self.short_list = []
+
+        # initialize the indicators
+        self.rsi = RelativeStrengthIndex(9)
+        self.bb = BollingerBonds(14, 2, 2)
+        self.macd = MovingAverageConvergenceDivergence(12, 26, 9)
+        self.stochastic = Stochastic(14, 3, 3)
+        self.ema = ExponentialMovingAverage(9)
+
+        # arrays to store historical indicator values
