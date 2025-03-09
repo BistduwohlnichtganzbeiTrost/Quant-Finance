@@ -148,3 +148,23 @@ class DDPG(object):
             return action / max_action
         else:
             return action
+        
+    def predict_action(self, state):
+        """Preduct Optimal Portfolio
+        
+        Args:
+            state(float): stock data with size: [self.n_stock, ]
+        Retrun:
+            np.array with size: [self.n_stock, ]
+        """
+        pred_state = self.memory[0].sample_state_uniform(self.n_batch, self.n_history)
+        new_state = pred_state[-1]
+        new_state = np.concatenate((new_state[1:], [state]), axis=0)
+        pred_state = np.concatenate((pred_state[:-1], [new_state]), axis=0)
+        action = self.actor_output.eval(
+            session=self.sess,
+            feed_dict={self.state: pred_state, K.learning_phase(): 0})[-1]
+        # action = self.norm_action(action)
+        return action
+    
+    
